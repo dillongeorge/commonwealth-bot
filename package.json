@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/dillongeorge/commonwealth-bot#readme",
   "dependencies": {
-    "botkit": "^0.4.0",
-    "pdf2json": "^1.1.7"
+    "botkit": "^0.4.0"
   }
 }

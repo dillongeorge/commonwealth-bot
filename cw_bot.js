@@ -1,6 +1,9 @@
+"use strict";
+
 var Botkit = require('botkit');
 var path = require('path');
 var fs = require('fs');
+var path = require('path');
 
 if(!process.env.token) {
 	console.log("Give me a token, fam!");
@@ -18,7 +21,9 @@ var bot = controller.spawn({
 }).startRTM();
 
 
-controller.hears(['common', 'cw'], 'direct_message,direct_mention,mention', function(bot, message) {
+controller.hears(['beers'], 'direct_message,direct_mention,mention', function(bot, message) {
+
+	let request = require('request');
 
     bot.api.reactions.add({
         timestamp: message.ts,
@@ -30,12 +35,18 @@ controller.hears(['common', 'cw'], 'direct_message,direct_mention,mention', func
         }
     });
 
-
-    controller.storage.users.get(message.user, function(err, user) {
-        if (user && user.name) {
-            bot.reply(message, 'Hello ' + user.name + '!!');
-        } else {
-            bot.reply(message, 'Soon there will be beer.');
-        }
+    request.post({
+    	url: 'https://slack.com/api/files.upload', 
+    	formData: {
+    		token: bot.config.token,
+    		file: fs.createReadStream(path.normalize('./skills/beers.pdf')),
+	    	filename: 'beers.pdf', 
+	    	title: ':beers: Beer List :beers:',
+	    	channels: [message.channel]
+    	}
+    }, (err, res) => {
+    	if(err) console.log("Error During Request: ", err);
+    	else //do-nothing
     });
+
 });
