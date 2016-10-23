@@ -45,8 +45,7 @@ controller.hears(['beers'], 'direct_message,direct_mention,mention', function(bo
 	    	channels: [message.channel]
     	}
     }, (err, res) => {
-    	if(err) console.log("Error During Request: ", err);
-    	else //do-nothing
+    	if(err) bot.botkit.log("Error During Request: ", err);
     });
 
 });
