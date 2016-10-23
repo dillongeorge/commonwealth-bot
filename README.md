@@ -1,5 +1,5 @@
 # commonwealth-bot
-Dank beers.
+*Dank beers. Still need to make the app pull most recent PDFs from Commonwealth's website!*
 
 Follow these steps for dank beer lists: 
 
